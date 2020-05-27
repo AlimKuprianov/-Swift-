@@ -74,7 +74,7 @@ class Children:People {
 
 let people = People ()
 parents.firstname
-people.printStr()     // имя Aнна не отобразится при выводе потому что ее перезапись в классе Children,                           а не People
+people.printStr()     // имя Aнна не отобразится при выводе потому что ее перезапись в классе Children,                                        // а не People
 
 let children =  Children ()
 child.lastname
@@ -165,7 +165,7 @@ let midpeople = midPeople ()
 
 
 
-var Array = [main, junpeople, midpeople]    // и есть полиморфизм, объединение в одну группу чего-то по                                                 общему признаку
+var Array = [main, junpeople, midpeople]    // и есть полиморфизм, объединение в одну группу чего-то по                                                              //общему признаку
 
 
 for  obj in Array {
