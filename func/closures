@@ -1,0 +1,247 @@
+import UIKit
+import Foundation
+
+
+
+
+func oneStep (coordinates: inout (Int,Int), StepType: String ) {
+    
+    
+    func up (coords: inout (Int,Int)) {
+        coords = (coords.0 + 1, coords.1)
+    }
+    
+    
+    func right (coords: inout (Int,Int)) {
+        coords = (coords.1, coords.1+1)
+        
+    }
+    
+    
+    func down (coords: inout (Int,Int)) {
+          coords = (coords.0-1, coords.1)
+          
+      }
+    
+    
+    func left (coords: inout (Int,Int)) {
+        coords = (coords.1, coords.1-1)
+        
+    }
+
+    
+    
+    
+    switch StepType {
+   
+    case "up":
+        up(coords: &coordinates)
+        
+    case "right":
+    right(coords: &coordinates)
+        
+    case "down":
+        down(coords: &coordinates)
+        
+    case "left":
+        left(coords: &coordinates)
+        
+    default:
+        break;
+    }
+}
+
+
+
+var coordinates = (15,15)
+ 
+oneStep(coordinates: &coordinates, StepType: "left")
+
+
+
+
+
+// перегрузка функций - две функции с одинаковыми именами в одной и той же области видимости, но с разными функциональными типами
+
+
+func say (what: String) {
+    
+}
+
+func say (what: Int) {
+    
+}
+
+
+// если функции имеют одинаковые входные данные, им нужно иметь разные выходные данные
+
+
+
+func hi () -> Int {
+    
+    return 2
+}
+
+func hi () -> String {
+    
+    return "one"
+}
+
+
+
+let result:String = hi() + " ONE"
+
+print(result)
+
+
+let result2 : Int = hi() + 5
+print(result2)
+
+
+
+
+//рекурсия - когда функция может вызывать саму себя
+
+
+
+func countDown (firstNumber numb:Int) {
+    
+    print(numb)
+    
+    if numb > 0 {
+        countDown(firstNumber: numb-1)
+    }
+    
+}
+
+countDown(firstNumber: 15)
+
+
+
+
+
+
+
+
+//closure - замыкания
+
+
+let funcInLet = {return true}
+
+funcInLet()
+
+
+
+
+
+
+
+var wallet = [100, 50, 50, 1000, 100, 200, 5000, 100, 2000, 100, 200, 100, 1000]
+
+
+func handle100 (wallet: [Int] ) -> [Int] {
+    
+    
+    var returnWallet =  [Int]()
+    
+    for banknot in wallet {
+        if banknot == 100 {
+            returnWallet.append(banknot)
+        }
+    }
+    return returnWallet
+}
+
+
+
+handle100(wallet: wallet)
+var res = handle100(wallet: wallet)
+
+print(res)
+
+
+
+
+func handleMore1000 (wallet: [Int]) -> [Int] {
+    
+    
+    var returnWallet = [Int] ()
+    
+    for bancknot in wallet {
+        if bancknot >= 1000 {
+            returnWallet.append(bancknot)
+        }
+    }
+    return returnWallet
+}
+
+
+handleMore1000(wallet: wallet)
+
+var res2 = handleMore1000(wallet: wallet)
+
+print(res2)
+
+//
+
+
+
+
+
+
+func handle (wallet: [Int], closure:(Int)->Bool) -> [Int] {
+    
+    var returnWallet = [Int]()
+    
+    
+    for banknote in wallet {
+        if closure(banknote) == true {
+            returnWallet.append(banknote)
+        }
+    }
+    return returnWallet
+}
+
+
+
+func sotka (banknote: Int) -> Bool {
+    
+    return banknote == 100
+}
+
+
+func Compare1000 (banknote : Int) -> Bool {
+    
+    return banknote == 1000
+}
+
+
+handle(wallet: wallet, closure: sotka)
+handle(wallet: wallet, closure: Compare1000)
+
+
+
+
+//аналог  функции sotka
+
+handle(wallet: wallet, closure: {(banknote: Int) -> Bool in
+    
+    
+    return banknote == 100
+    
+})
+
+
+
+handle(wallet: wallet, closure: {(banknote: Int)->Bool in
+    
+    return banknote >= 1000
+})
+
+
+
+
+
+
+
+//
